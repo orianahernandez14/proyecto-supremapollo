@@ -47,7 +47,7 @@
                 <p><strong>Compra mínima: 5 kg.</strong></p>
                 <p>Entrega a coordinar.</p>
 
-                <a class="boton-principal" href="https://wa.me/541164776533" target="_blank">
+                <a class="boton-principal" href="https://wa.me/541126752010" target="_blank" rel="noopener noreferrer">
                     <i class="fab fa-whatsapp"></i> Realizar compra y agendar entrega
                 </a>
             </div>
@@ -79,7 +79,7 @@
                     <h3>Pollo a granel</h3>
                     <p>Fresca, sin condimentos y sellada al vacío. Lista para preparar a tu gusto.</p>
                     <p class="precio">$11.499 <span>por kg</span></p>
-                    <a href="https://wa.me/541164776533" target="_blank">Consultar</a>
+                    <a class="elegir-producto" href="#hacer-pedido" data-producto="granel">Elegir producto</a>
                 </article>
 
                 <article class="producto">
@@ -87,7 +87,7 @@
                     <h3>Clásico</h3>
                     <p>El sabor de siempre. Aceite, sal y pimienta, listo para cocinar.</p>
                     <p class="precio">$16.999 <span>por kg</span></p>
-                    <a href="https://wa.me/541164776533" target="_blank">Consultar</a>
+                    <a class="elegir-producto" href="#hacer-pedido" data-producto="clasico">Elegir producto</a>
                 </article>
 
                 <article class="producto">
@@ -95,7 +95,7 @@
                     <h3>Provenzal</h3>
                     <p>Con ajo, perejil, aceite, sal y pimienta. Una opción bien casera.</p>
                     <p class="precio">$16.999 <span>por kg</span></p>
-                    <a href="https://wa.me/541164776533" target="_blank">Consultar</a>
+                    <a class="elegir-producto" href="#hacer-pedido" data-producto="provenzal">Elegir producto</a>
                 </article>
 
                 <article class="producto">
@@ -103,7 +103,7 @@
                     <h3>Mostaza</h3>
                     <p>Un toque diferente, suave y lleno de sabor para tener listo en casa.</p>
                     <p class="precio">$16.999 <span>por kg</span></p>
-                    <a href="https://wa.me/541164776533" target="_blank">Consultar</a>
+                    <a class="elegir-producto" href="#hacer-pedido" data-producto="mostaza">Elegir producto</a>
                 </article>
 
                 <article class="producto">
@@ -111,7 +111,7 @@
                     <h3>Pimentón</h3>
                     <p>Marinada con aceite, sal, pimienta y pimentón. Intensa y sabrosa.</p>
                     <p class="precio">$16.999 <span>por kg</span></p>
-                    <a href="https://wa.me/541164776533" target="_blank">Consultar</a>
+                    <a class="elegir-producto" href="#hacer-pedido" data-producto="pimenton">Elegir producto</a>
                 </article>
 
             </div>
@@ -157,6 +157,49 @@
         </section>
 
 
+
+        <section id="hacer-pedido">
+            <p class="subtitulo-naranja">PREPARÁ TU PEDIDO</p>
+            <h2>Elegí tu pollo y calculá el total</h2>
+            <p>La compra mínima es de 5 kg. El pedido se confirma por WhatsApp.</p>
+
+            <form id="formulario-pedido">
+                <label for="pedido-producto">Producto</label>
+                <select id="pedido-producto" required>
+                    <option value="granel">Pollo a granel</option>
+                    <option value="clasico">Clásico (sal y pimienta)</option>
+                    <option value="provenzal">Provenzal</option>
+                    <option value="mostaza">Mostaza</option>
+                    <option value="pimenton">Pimentón</option>
+                </select>
+
+                <label for="pedido-kilos">Cantidad (kg)</label>
+                <input id="pedido-kilos" type="number" min="5" step="1" value="5" required>
+
+                <p class="total-pedido">Total estimado: <strong id="pedido-total">$57.495</strong></p>
+
+                <label for="pedido-nombre">Nombre</label>
+                <input id="pedido-nombre" type="text" required placeholder="Tu nombre">
+
+                <label for="pedido-telefono">Teléfono</label>
+                <input id="pedido-telefono" type="tel" required placeholder="Tu número de contacto">
+
+                <label for="pedido-zona">Barrio o zona de entrega</label>
+                <input id="pedido-zona" type="text" required placeholder="¿En qué zona estás?">
+
+                <label for="pedido-dia">Día preferido</label>
+                <select id="pedido-dia" required>
+                    <option value="">Seleccioná un día</option>
+                    <option value="Lunes">Lunes</option>
+                    <option value="Viernes">Viernes</option>
+                </select>
+
+                <p id="pedido-aviso" role="status" aria-live="polite"></p>
+                <button type="submit"><i class="fab fa-whatsapp"></i> Consultar pedido por WhatsApp</button>
+                <p class="nota-pedido">Los precios son estimados. Consultá disponibilidad y zona de entrega.</p>
+            </form>
+        </section>
+
         <section class="llamada" id="contacto">
             <div class="llamada__imagen">
                 <img src="img/pollos-todos.png" alt="Opciones de supremas de pollo envasadas al vacío">
@@ -164,8 +207,8 @@
             <div class="llamada__texto">
                 <h2>Calidad que se nota,<br> sabor que te encanta.</h2>
                 <p>Compra mínima: 5 kg.</p>
-                <p>Consultá zona de entrega.</p>
-                <a href="https://wa.me/541164776533" target="_blank">
+                <p>Consultá zona de entrega.</p><p>WhatsApp: 11 2675 2010 / 11 3238 4204</p>
+                <a href="https://wa.me/541126752010" target="_blank" rel="noopener noreferrer">
                     <i class="fab fa-whatsapp"></i> REALIZAR COMPRA Y AGENDAR ENTREGA
                 </a>
             </div>
@@ -182,5 +225,6 @@
         <p><i class="fas fa-location-dot"></i> Consultá zona de entrega</p>
     </footer>
 
+    <script src="script.js"></script>
 </body>
 </html>
