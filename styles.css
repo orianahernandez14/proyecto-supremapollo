@@ -22,13 +22,13 @@ a {
 
 /* header */
 header {
-    background-color: #ffe7cf;
+    background-color: #f2d1ad;
     padding: 16px 5%;
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 25px;
-    border-bottom: 2px solid #f3dfca;
+    border-bottom: 2px solid #dfb58c;
 }
 
 .marca {
