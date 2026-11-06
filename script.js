@@ -4,6 +4,15 @@ const urlProductos = "https://api.github.com/repos/orianahernandez14/proyecto-su
 const whatsappPedidos = "541126752010";
 const formspreeId = ""; // Completar con el ID de Formspree para activar el contacto
 const claveCarrito = "supremas-carrito-v1";
+const claveFavoritos = "supremas-favoritos-v1";
+const claveTema = "supremas-tema-v1";
+let favoritos = [];
+const testimoniosDemo = [
+    { nombre: "Cliente de ejemplo A", estrellas: 5, mensaje: "Me gustó poder combinar los sabores en un solo pedido." },
+    { nombre: "Cliente de ejemplo B", estrellas: 4, mensaje: "El carrito me permite calcular fácilmente cuánto voy a pedir." },
+    { nombre: "Cliente de ejemplo C", estrellas: 5, mensaje: "La información de cada variedad es fácil de encontrar." },
+    { nombre: "Cliente de ejemplo D", estrellas: 3, mensaje: "Sería útil contar con más opciones para coordinar la entrega." }
+];
 let productos = [];
 let carrito = [];
 
@@ -54,13 +63,20 @@ function mostrarProductos() {
     const categoria = filtro.value;
     const visibles = productos.filter(function (item) {
         const coincide = (item.nombre + " " + item.descripcion).toLowerCase().includes(texto);
-        return coincide && (categoria === "todos" || item.tipo === categoria);
+        return coincide && (categoria === "todos" || item.tipo === categoria || (categoria === "favoritos" && favoritos.includes(item.id)));
     });
     if (visibles.length === 0) estado.textContent = "No encontramos productos con esos filtros.";
     else estado.textContent = "";
     visibles.forEach(function (item) {
         const tarjeta = document.createElement("article");
         tarjeta.className = "producto";
+        const favorito = document.createElement("button");
+        favorito.type = "button";
+        favorito.className = "boton-favorito";
+        favorito.textContent = favoritos.includes(item.id) ? "♥" : "♡";
+        favorito.setAttribute("aria-label", favoritos.includes(item.id) ? "Quitar " + item.nombre + " de favoritos" : "Guardar " + item.nombre + " en favoritos");
+        favorito.setAttribute("aria-pressed", favoritos.includes(item.id) ? "true" : "false");
+        favorito.addEventListener("click", function () { alternarFavorito(item.id); });
         const imagen = document.createElement("img");
         imagen.className = "producto__imagen";
         imagen.src = item.imagen;
@@ -85,9 +101,17 @@ function mostrarProductos() {
         boton.type = "button";
         boton.textContent = "Agregar al carrito";
         boton.addEventListener("click", function () {
-            agregarProducto(item.id, Number(cantidad.value));
+            const agregado = agregarProducto(item.id, Number(cantidad.value));
+            if (agregado) {
+                boton.classList.add("agregado");
+                boton.textContent = "✓ Agregado al carrito";
+                setTimeout(function () {
+                    boton.classList.remove("agregado");
+                    boton.textContent = "Agregar al carrito";
+                }, 1200);
+            }
         });
-        tarjeta.append(imagen, titulo, descripcion, precio, etiqueta, cantidad, boton);
+        tarjeta.append(imagen, favorito, titulo, descripcion, precio, etiqueta, cantidad, boton);
         contenedor.appendChild(tarjeta);
     });
 }
@@ -95,16 +119,17 @@ function mostrarProductos() {
 function agregarProducto(id, cantidad) {
     if (!Number.isFinite(cantidad) || cantidad <= 0 || !Number.isInteger(cantidad * 2)) {
         estado.textContent = "Ingresá una cantidad válida en pasos de 0,5 kg.";
-        return;
+        return false;
     }
     const item = productos.find(function (p) { return p.id === id; });
-    if (!item) return;
+    if (!item) return false;
     const existente = carrito.find(function (p) { return p.id === id; });
     if (existente) existente.cantidad += cantidad;
     else carrito.push({ id: id, cantidad: cantidad });
     guardarCarrito();
     mostrarCarrito();
     estado.textContent = item.nombre + " agregado al carrito.";
+    return true;
 }
 
 function cambiarCantidad(id, cantidad) {
@@ -227,3 +252,63 @@ document.getElementById("formulario-contacto").addEventListener("submit", async 
 
 recuperarCarrito();
 cargarProductos();
+
+function alternarFavorito(id) {
+    if (favoritos.includes(id)) {
+        favoritos = favoritos.filter(function (favorito) { return favorito !== id; });
+    } else {
+        favoritos.push(id);
+    }
+    localStorage.setItem(claveFavoritos, JSON.stringify(favoritos));
+    mostrarProductos();
+}
+
+function cargarPreferencias() {
+    try {
+        const guardados = JSON.parse(localStorage.getItem(claveFavoritos));
+        if (Array.isArray(guardados)) favoritos = guardados;
+    } catch (error) {
+        favoritos = [];
+    }
+    if (localStorage.getItem(claveTema) === "oscuro") document.body.classList.add("modo-oscuro");
+    actualizarBotonTema();
+}
+
+function actualizarBotonTema() {
+    const boton = document.getElementById("cambiar-tema");
+    const oscuro = document.body.classList.contains("modo-oscuro");
+    boton.textContent = oscuro ? "☀️ Modo claro" : "🌙 Modo oscuro";
+    boton.setAttribute("aria-pressed", String(oscuro));
+}
+
+document.getElementById("cambiar-tema").addEventListener("click", function () {
+    document.body.classList.toggle("modo-oscuro");
+    const oscuro = document.body.classList.contains("modo-oscuro");
+    localStorage.setItem(claveTema, oscuro ? "oscuro" : "claro");
+    actualizarBotonTema();
+});
+
+function mostrarResenas() {
+    const filtroResenas = document.getElementById("filtro-resenas").value;
+    const contenedorResenas = document.getElementById("resenas-contenedor");
+    contenedorResenas.innerHTML = "";
+    const visibles = testimoniosDemo.filter(function (resena) {
+        return filtroResenas === "todas" || resena.estrellas === Number(filtroResenas);
+    });
+    visibles.forEach(function (resena) {
+        const tarjeta = document.createElement("article");
+        const estrellas = document.createElement("p");
+        estrellas.className = "estrellas";
+        estrellas.textContent = "★".repeat(resena.estrellas) + "☆".repeat(5 - resena.estrellas);
+        const mensaje = document.createElement("p");
+        mensaje.textContent = "“" + resena.mensaje + "”";
+        const nombre = document.createElement("strong");
+        nombre.textContent = resena.nombre + " · Demostración";
+        tarjeta.append(estrellas, mensaje, nombre);
+        contenedorResenas.appendChild(tarjeta);
+    });
+    document.getElementById("resenas-estado").textContent = visibles.length + " opiniones de demostración.";
+}
+document.getElementById("filtro-resenas").addEventListener("change", mostrarResenas);
+cargarPreferencias();
+mostrarResenas();
