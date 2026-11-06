@@ -22,13 +22,13 @@ a {
 
 /* header */
 header {
-    background-color: rgba(255, 248, 238, 0.96);
+    background-color: #f2d1ad;
     padding: 16px 5%;
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 25px;
-    border-bottom: 2px solid #f3dfca;
+    border-bottom: 2px solid #dfb58c;
 }
 
 .marca {
@@ -406,138 +406,94 @@ footer img {
 
 footer p { margin: 0; }
 
+
+/* formulario de pedidos */
+#hacer-pedido {
+    background-color: #fff7ec;
+    text-align: center;
+    padding: 65px 5%;
+}
+#hacer-pedido h2 { font-size: 2.4rem; }
+#formulario-pedido {
+    max-width: 550px;
+    margin: 30px auto 0;
+    padding: 28px;
+    background: white;
+    border-radius: 22px;
+    box-shadow: 0 8px 24px rgba(80, 50, 20, .12);
+    text-align: left;
+}
+#formulario-pedido label {
+    display: block;
+    margin: 15px 0 6px;
+    font-weight: 700;
+}
+#formulario-pedido input, #formulario-pedido select {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #cfc4b8;
+    border-radius: 10px;
+    font: inherit;
+}
+.total-pedido {
+    background: #fff0dd;
+    border-radius: 12px;
+    padding: 18px;
+    margin: 20px 0;
+    font-size: 1.2rem;
+}
+.total-pedido strong { color: #e95016; }
+#formulario-pedido button {
+    width: 100%;
+    padding: 15px;
+    background: #e94a0d;
+    color: white;
+    border: 0;
+    border-radius: 25px;
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+}
+#formulario-pedido button:hover { background: #b93508; }
+#pedido-aviso { color: #a4360c; margin-top: 15px; }
+.nota-pedido { color: #666; font-size: .85rem; margin: 15px 0 0; }
+.boton-principal:hover, .producto > a:hover { background: #c13a0a; }
+body { background-size: auto; }
+
 /* mq - primero tablet */
 @media (max-width: 992px) {
-    header {
-        flex-direction: column;
-    }
-
-    header nav ul {
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-
-    #inicio {
-        grid-template-columns: 1fr 1fr;
-    }
-
-    #titulo_inicio {
-        font-size: 3.4rem;
-    }
-
-    .productos__contenedor {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .pasos {
-        grid-template-columns: repeat(2, 1fr);
-
-    .entrega {
-        width: 140px;
-        height: 140px;
-    }
-
-    .entrega h3 {
-        font-size: 22px;
-    }
-
-    .entrega p {
-        font-size: 14px;
-    }
-
-    .entrega i {
-        font-size: 24px;
-    }
-
+    header { flex-direction: column; }
+    header nav ul { flex-wrap: wrap; justify-content: center; }
+    #inicio { grid-template-columns: 1fr 1fr; }
+    #titulo_inicio { font-size: 3.4rem; }
+    .productos__contenedor { grid-template-columns: repeat(2, 1fr); }
+    .pasos { grid-template-columns: repeat(2, 1fr); }
+    .circulo-entrega { width: 140px; height: 140px; }
+    .circulo-entrega strong { font-size: 1.1rem; }
+    .circulo-entrega span { font-size: .9rem; }
+    .circulo-entrega small { font-size: .7rem; }
 }
-
 /* mq - celular */
 @media (max-width: 768px) {
-    header nav ul {
-        flex-direction: column;
-        text-align: center;
-        gap: 12px;
-    }
-
-    #inicio {
-        grid-template-columns: 1fr;
-    }
-
-    .inicio__texto {
-        padding: 45px 25px;
-        text-align: center;
-    }
-
-    #titulo_inicio {
-        font-size: 3.2rem;
-    }
-
-    #titulo_inicio span {
-        font-size: 2.6rem;
-    }
-
-    .inicio__foto {
-        min-height: 390px;
-    }
-
-    .circulo-entrega {
-        width: 135px;
-        height: 135px;
-        top: 20px;
-        right: 20px;
-    }
-
-    #productos h2 {
-        font-size: 2.2rem;
-    }
-
-    .productos__contenedor {
-        grid-template-columns: 1fr;
-    }
-
-    .producto__imagen {
-        height: auto;
-    }
-
-    .beneficios {
-        flex-direction: column;
-    }
-
-    .pasos {
-        grid-template-columns: 1fr;
-    }
-
-    .llamada {
-        grid-template-columns: 1fr;
-    }
-
-    .llamada__imagen {
-        height: 280px;
-    }
-
-    .llamada__texto {
-        padding: 40px 25px;
-    }
-
-    footer {
-        flex-direction: column;
-        text-align: center;
-
-    .entrega {
-        width: 110px;
-        height: 110px;
-    }
-
-    .entrega h3 {
-        font-size: 17px;
-    }
-
-    .entrega p {
-        font-size: 11px;
-    }
-
-    .entrega i {
-        font-size: 18px;
-    }
-
+    header nav ul { flex-direction: column; text-align: center; gap: 12px; }
+    #inicio { grid-template-columns: 1fr; }
+    .inicio__texto { padding: 45px 25px; text-align: center; }
+    #titulo_inicio { font-size: 3.2rem; }
+    #titulo_inicio span { font-size: 2.6rem; }
+    .inicio__foto { min-height: 390px; }
+    .circulo-entrega { width: 125px; height: 125px; top: 20px; right: 20px; }
+    .circulo-entrega i { font-size: 1.2rem; margin-bottom: 3px; }
+    .circulo-entrega strong { font-size: 1rem; }
+    .circulo-entrega span { font-size: .8rem; }
+    .circulo-entrega small { font-size: .65rem; }
+    #productos h2 { font-size: 2.2rem; }
+    .productos__contenedor { grid-template-columns: 1fr; }
+    .producto__imagen { height: auto; }
+    .beneficios { flex-direction: column; }
+    .pasos { grid-template-columns: 1fr; }
+    .llamada { grid-template-columns: 1fr; }
+    .llamada__imagen { height: 280px; }
+    .llamada__texto { padding: 40px 25px; }
+    footer { flex-direction: column; text-align: center; }
+    #formulario-pedido { padding: 18px; }
 }

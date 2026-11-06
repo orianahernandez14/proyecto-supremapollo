@@ -1,41 +1,35 @@
 # Suprema de Pollo
 
-Proyecto realizado como práctica para el curso de Front End de Talento Tech.
+Landing page para mostrar las variedades de supremas de pollo y preparar consultas de pedidos por WhatsApp.
 
-## Descripción
-Landing page de un emprendimiento de venta y entrega a domicilio de supremas de pollo.
-El proyecto empezó con HTML básico y se fue mejorando con los contenidos vistos en clase.
-
-## En esta versión se practicó
-- HTML semántico
-- Imágenes y enlaces
-- CSS básico
-- Flexbox
-- CSS Grid
-- gap, filas y columnas
-- pseudo-clase :hover y transition
-- Media Queries
-- diseño responsive para desktop, tablet y celular
-
-## Lo próximo que quiero agregar
-- Cambiar los botones consultar por comprar, o agregar al carrito.
-- En otra página preparar previamente el pedido
-- Que el cliente pueda confirmarlo y al realizar el pedido se cree un mensaje que se establezca en el campro de texto a enviar por whatsapp
-- De esa manera llega toda la informacion del pedido al whatsapp del negocio, con un formato predeterminado
+Proyecto de práctica del curso Front End de Talento Tech. Está realizado con HTML, CSS y JavaScript.
 
 ## Productos
-- Pollo a granel
-- Clásico
-- Provenzal
-- Mostaza
-- Pimentón
+- Pollo a granel: $11.499/kg.
+- Clásico, Provenzal, Mostaza y Pimentón: $16.999/kg.
+- Compra mínima: 5 kg.
+- Entregas a coordinar; consultar zona.
 
-## Estructura
-- index.html
-- styles.css
-- carpeta img/
+## Cómo probarlo
+1. Abrir `index.html` en el navegador.
+2. Elegir un producto desde las tarjetas.
+3. Indicar 5 kg o más.
+4. Completar los datos y elegir un día preferido.
+5. Pulsar «Consultar pedido por WhatsApp».
+
+El total es estimado. El sitio no cobra ni confirma automáticamente pedidos.
+
+## Archivos
+- `index.html`: contenido y formulario.
+- `styles.css`: diseño responsive.
+- `script.js`: cálculo, validaciones y mensaje de WhatsApp.
+- `img/`: fotografías y recursos.
+
+## Tecnologías practicadas
+HTML semántico, Flexbox, CSS Grid, Media Queries, variables, operadores, condicionales, bucles, funciones, DOM y eventos.
+
+## Estado
+Primera versión con JavaScript en desarrollo. Pendiente de pruebas y publicación.
 
 ## Autora
-Oriana Hernández
-
-Proyecto académico – Curso Front End
+Oriana Hernández — Curso Front End.
