@@ -524,3 +524,27 @@ body { background-size: auto; }
 #contador-carrito { background:#e94a0d; color:white; border-radius:50%; padding:3px 8px; }
 :focus-visible { outline:3px solid #246ac5; outline-offset:3px; }
 @media(max-width:768px) { .compra-layout,.resenas-grid { grid-template-columns:1fr; } .catalogo-controles { flex-direction:column; } .producto { max-width:100%; } }
+
+/* Interacciones del catálogo */
+.producto { position:relative; }
+.producto button.agregado { background:#237a49; color:white; transform:scale(.98); }
+.producto button:not(.boton-favorito) { transition:background-color .18s ease, transform .18s ease; }
+.producto button:not(.boton-favorito):active { background:#a8370e; transform:scale(.96); }
+.producto .boton-favorito { position:absolute; top:20px; right:20px; margin:0; width:45px; height:45px; border-radius:50%; background:white; color:#d83c28; font-size:28px; box-shadow:0 3px 12px #0002; padding:0; }
+.producto .boton-favorito[aria-pressed="true"] { background:#ffe5e0; }
+#cambiar-tema { border:1px solid #b87850; background:transparent; border-radius:25px; padding:8px 12px; cursor:pointer; font:inherit; font-weight:700; }
+#filtro-resenas { padding:12px; border-radius:10px; border:1px solid #c8b29b; font:inherit; }
+.estrellas { color:#e78b15; font-size:24px; letter-spacing:3px; }
+.contacto-secundario { padding:28px 5% !important; }
+.contacto-secundario details { max-width:650px; margin:16px auto; }
+.contacto-secundario summary { cursor:pointer; font-weight:700; }
+.contacto-secundario form { padding-top:22px; }
+.modo-oscuro { background:#18191b; background-image:none; color:#f4eee5; }
+.modo-oscuro header,.modo-oscuro #inicio,.modo-oscuro #como-funciona,.modo-oscuro #hacer-pedido,.modo-oscuro #resenas,.modo-oscuro #contacto-formulario { background:#242528; color:#f4eee5; }
+.modo-oscuro .producto,.modo-oscuro .panel-compra,.modo-oscuro .resenas-grid article,.modo-oscuro .beneficios { background:#34363a; color:#f4eee5; border-color:#555; }
+.modo-oscuro .producto p,.modo-oscuro .beneficios span,.modo-oscuro .nota-pedido,.modo-oscuro #productos > p:not(.subtitulo-naranja) { color:#e3d9cd; }
+.modo-oscuro .h2-gris,.modo-oscuro .total-pedido,.modo-oscuro .aviso-entrega { background:#424046; color:#fff; }
+.modo-oscuro header nav a,.modo-oscuro .marca h1,.modo-oscuro #titulo_inicio,.modo-oscuro #cambiar-tema { color:#fff; }
+.modo-oscuro #formulario-pedido input,.modo-oscuro #formulario-pedido select,.modo-oscuro .catalogo-controles input,.modo-oscuro .catalogo-controles select,.modo-oscuro #formulario-contacto input,.modo-oscuro #formulario-contacto textarea,.modo-oscuro #filtro-resenas { background:#2d2f32; color:#fff; border-color:#777; }
+.modo-oscuro #carrito-reglas { color:#ffbb8e; }
+@media(prefers-reduced-motion:reduce) { .producto,.producto button { transition:none !important; } }
