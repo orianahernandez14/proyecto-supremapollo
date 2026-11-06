@@ -31,9 +31,9 @@
                 <li><a href="#productos">NUESTROS PRODUCTOS</a></li>
                 <li><a href="#como-funciona">CÓMO FUNCIONA</a></li>
                 <li><a href="#resenas">RESEÑAS</a></li>
-                <li><a href="#contacto-formulario">CONTACTO</a></li>
-                <li><a href="#carrito">CARRITO <span id="contador-carrito" aria-live="polite">0</span></a></li>
                 <li><a href="#contacto">CONTACTO</a></li>
+                <li><a href="#carrito">CARRITO <span id="contador-carrito" aria-live="polite">0</span></a></li>
+                <li><button id="cambiar-tema" type="button" aria-pressed="false">🌙 Modo oscuro</button></li>
             </ul>
         </nav>
     </header>
@@ -81,7 +81,7 @@
                 <label for="buscar-producto">Buscar</label>
                 <input id="buscar-producto" type="search" placeholder="Buscar por nombre o ingrediente">
                 <label for="filtro-tipo">Categoría</label>
-                <select id="filtro-tipo"><option value="todos">Todos</option><option value="granel">A granel</option><option value="aderezado">Aderezados</option></select>
+                <select id="filtro-tipo"><option value="todos">Todos</option><option value="granel">A granel</option><option value="aderezado">Aderezados</option><option value="favoritos">Mis favoritos ♥</option></select>
             </div>
             <p id="estado-catalogo" role="status" aria-live="polite">Cargando productos...</p>
             <div class="productos__contenedor" id="productos-contenedor"></div>
@@ -156,26 +156,32 @@
         </section>
 
         <section id="resenas">
-            <h2>Lo que valoran nuestros clientes</h2>
-            <p>Una buena compra empieza con productos frescos y atención cercana.</p>
-            <div class="resenas-grid">
-                <article><h3>Producto fresco</h3><p>Supremas preparadas para que puedas cocinarlas como más te gusten.</p></article>
-                <article><h3>Sabores para combinar</h3><p>Podés elegir distintas variedades aderezadas en un mismo pedido.</p></article>
-                <article><h3>Entrega coordinada</h3><p>Consultá disponibilidad y coordiná el día por WhatsApp.</p></article>
-            </div>
-            <p class="nota-pedido">Estas tarjetas describen beneficios del servicio; no son testimonios de clientes.</p>
+            <h2>Opiniones de ejemplo</h2>
+            <p>Probá el filtro de puntuación. Estos testimonios son ficticios y se muestran únicamente como demostración del proyecto.</p>
+            <label for="filtro-resenas">Filtrar por estrellas</label>
+            <select id="filtro-resenas">
+                <option value="todas">Todas las puntuaciones</option>
+                <option value="5">5 estrellas</option>
+                <option value="4">4 estrellas</option>
+                <option value="3">3 estrellas</option>
+            </select>
+            <div class="resenas-grid" id="resenas-contenedor"></div>
+            <p id="resenas-estado" role="status" aria-live="polite"></p>
         </section>
 
-        <section id="contacto-formulario">
-            <h2>Contactanos</h2>
-            <p>Dejanos tu consulta. El formulario de Formspree se habilitará al configurar su identificador.</p>
-            <form id="formulario-contacto">
-                <label for="contacto-nombre">Nombre</label><input id="contacto-nombre" name="name" type="text" required>
-                <label for="contacto-email">Correo electrónico</label><input id="contacto-email" name="email" type="email" required>
-                <label for="contacto-mensaje">Mensaje</label><textarea id="contacto-mensaje" name="message" rows="5" required></textarea>
-                <p id="contacto-aviso" role="status" aria-live="polite"></p>
-                <button type="submit">Enviar consulta</button>
-            </form>
+        <section id="contacto-formulario" class="contacto-secundario">
+            <h2>Formulario para la entrega académica</h2>
+            <p>Este formulario se habilitará cuando configuremos Formspree. Para consultas comerciales utilizá WhatsApp.</p>
+            <details>
+                <summary>Mostrar formulario de contacto</summary>
+                <form id="formulario-contacto">
+                    <label for="contacto-nombre">Nombre</label><input id="contacto-nombre" name="name" type="text" required>
+                    <label for="contacto-email">Correo electrónico</label><input id="contacto-email" name="email" type="email" required>
+                    <label for="contacto-mensaje">Mensaje</label><textarea id="contacto-mensaje" name="message" rows="5" required></textarea>
+                    <p id="contacto-aviso" role="status" aria-live="polite"></p>
+                    <button type="submit">Enviar consulta</button>
+                </form>
+            </details>
         </section>
 
         <section class="llamada" id="contacto">
@@ -186,7 +192,7 @@
                 <h2>Calidad que se nota,<br> sabor que te encanta.</h2>
                 <p>Compra mínima: 5 kg.</p>
                 <p>Consultá zona de entrega.</p><p>WhatsApp: 11 2675 2010 / 11 3238 4204</p>
-                <a href="#hacer-pedido"> <i class="fas fa-shopping-cart"></i> PREPARAR MI PEDIDO
+                <a href="https://wa.me/541126752010?text=Hola%2C%20quiero%20hacer%20una%20consulta%20sobre%20las%20supremas%20de%20pollo" target="_blank" rel="noopener noreferrer"> <i class="fab fa-whatsapp"></i> CONSULTAR POR WHATSAPP
                 </a>
             </div>
         </section>
