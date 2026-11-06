@@ -1,6 +1,6 @@
 // Tienda de supremas - proyecto final Front End
 // Los productos se consultan desde la API REST pública de GitHub.
-const urlProductos = "https://api.github.com/repos/orianahernandez14/proyecto-supremapollo/contents/catalogo.json?ref=entrega-final-ecommerce";
+const urlProductos = "https://api.github.com/repos/orianahernandez14/proyecto-supremapollo/contents/catalogo.json?ref=desarrollo-mvp-js";
 const whatsappPedidos = "541126752010";
 const formspreeId = ""; // Completar con el ID de Formspree para activar el contacto
 const claveCarrito = "supremas-carrito-v1";
@@ -189,6 +189,7 @@ function mostrarCarrito() {
     if (carrito.length === 0) listaCarrito.textContent = "Todavía no agregaste productos.";
     document.getElementById("carrito-total").textContent = dinero(total);
     document.getElementById("contador-carrito").textContent = carrito.length;
+    document.getElementById("contador-flotante").textContent = carrito.length;
     document.getElementById("carrito-cantidad").textContent = cantidadTotal + " kg";
     mensajeReglas.textContent = validarCompra() || "Tu pedido cumple las cantidades mínimas.";
 }
@@ -312,3 +313,52 @@ function mostrarResenas() {
 document.getElementById("filtro-resenas").addEventListener("change", mostrarResenas);
 cargarPreferencias();
 mostrarResenas();
+
+const recetas = [
+    { nombre: "Supremas al horno con hierbas", tiempo: "35-40 min", dificultad: "Fácil", imagen: "img/suprema-pollo.png", ingredientes: "Supremas, limón, aceite de oliva, romero, ajo y pimienta.", pasos: "Precalentá el horno a 200 °C. Colocá las supremas en una fuente, condimentá y agregá limón. Horneá hasta que estén bien cocidas y alcancen 74 °C en el centro." },
+    { nombre: "Supremas a la plancha", tiempo: "20-25 min", dificultad: "Fácil", imagen: "img/pollo-provenzal.png", ingredientes: "Supremas provenzal, aceite y unas gotas de limón.", pasos: "Calentá una sartén con un poco de aceite. Cociná las supremas de ambos lados a fuego medio hasta que estén doradas y alcancen 74 °C en el centro." },
+    { nombre: "Supremas con mostaza y vegetales", tiempo: "35 min", dificultad: "Fácil", imagen: "img/pollo-mostaza.png", ingredientes: "Supremas a la mostaza, zanahoria, papa, cebolla y aceite.", pasos: "Cortá los vegetales, colocalos en una fuente con las supremas y un poco de aceite. Horneá hasta que los vegetales estén tiernos y el pollo alcance 74 °C en el centro." },
+    { nombre: "Supremas al pimentón con arroz", tiempo: "30-35 min", dificultad: "Fácil", imagen: "img/pollo-pimenton.png", ingredientes: "Supremas al pimentón, arroz, agua, aceite y perejil.", pasos: "Prepará el arroz por separado. Cociná las supremas en sartén hasta alcanzar 74 °C en el centro y servilas sobre el arroz con perejil fresco." }
+];
+let indiceRecetas = 0;
+function mostrarRecetas() {
+    const contenedorRecetas = document.getElementById("recetas-contenedor");
+    contenedorRecetas.innerHTML = "";
+    recetas.forEach(function (receta, indice) {
+        const tarjeta = document.createElement("article");
+        tarjeta.className = "receta-tarjeta";
+        if (indice < indiceRecetas || indice >= indiceRecetas + 3) tarjeta.classList.add("receta-oculta");
+        const imagen = document.createElement("img");
+        imagen.src = receta.imagen;
+        imagen.alt = "Suprema cruda para preparar " + receta.nombre;
+        const contenido = document.createElement("div");
+        const titulo = document.createElement("h3");
+        titulo.textContent = receta.nombre;
+        const meta = document.createElement("p");
+        meta.className = "receta-meta";
+        meta.textContent = receta.tiempo + " · " + receta.dificultad;
+        const detalle = document.createElement("details");
+        const resumen = document.createElement("summary");
+        resumen.textContent = "Ver receta";
+        const ingredientes = document.createElement("p");
+        ingredientes.textContent = "Ingredientes: " + receta.ingredientes;
+        const pasos = document.createElement("p");
+        pasos.textContent = receta.pasos;
+        detalle.append(resumen, ingredientes, pasos);
+        contenido.append(titulo, meta, detalle);
+        tarjeta.append(imagen, contenido);
+        contenedorRecetas.appendChild(tarjeta);
+    });
+}
+document.getElementById("recetas-anterior").addEventListener("click", function () {
+    indiceRecetas = Math.max(0, indiceRecetas - 1);
+    mostrarRecetas();
+});
+document.getElementById("recetas-siguiente").addEventListener("click", function () {
+    indiceRecetas = Math.min(recetas.length - 3, indiceRecetas + 1);
+    mostrarRecetas();
+});
+document.getElementById("abrir-carrito").addEventListener("click", function () {
+    document.getElementById("hacer-pedido").scrollIntoView({ behavior: "smooth" });
+});
+mostrarRecetas();
