@@ -24,7 +24,6 @@ El total es estimado. El sitio no cobra ni confirma automáticamente pedidos.
 - `styles.css`: diseño responsive.
 - `script.js`: cálculo, validaciones y mensaje de WhatsApp.
 - `img/`: fotografías y recursos.
-- `docs/`: [wiki y bitácora de estudio](docs/README.md).
 
 ## Tecnologías practicadas
 HTML semántico, Flexbox, CSS Grid, Media Queries, variables, operadores, condicionales, bucles, funciones, DOM y eventos.
