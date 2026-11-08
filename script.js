@@ -247,35 +247,75 @@ document.getElementById("formulario-contacto").addEventListener("submit", async 
 recuperarCarrito();
 cargarProductos();
 
-// Los testimonios se envían a Formspree para revisión antes de publicarse.
+// Testimonios: la clave publishable es pública. La seguridad depende de las políticas RLS.
+const supabaseUrl = "https://wumrhtyztpircywntcdw.supabase.co";
+const supabaseClave = "sb_publishable_JqC21O-PYQDhTFdMBcXK0Q_TBGibGjj";
+const apiTestimonios = supabaseUrl + "/rest/v1/testimonios";
+const cabecerasSupabase = { apikey: supabaseClave, "Content-Type": "application/json" };
+
+async function cargarTestimonios() {
+    const contenedorResenas = document.getElementById("resenas-contenedor");
+    if (!contenedorResenas) return;
+    try {
+        const respuesta = await fetch(apiTestimonios + "?select=nombre,estrellas,descripcion&estado=eq.aprobado&order=creado_en.desc&limit=30", {
+            headers: cabecerasSupabase
+        });
+        if (!respuesta.ok) throw new Error("No se pudieron cargar");
+        const testimonios = await respuesta.json();
+        contenedorResenas.replaceChildren();
+        if (!testimonios.length) {
+            const vacio = document.createElement("p");
+            vacio.textContent = "Todavía no hay testimonios publicados. ¡Podés dejar el primero!";
+            contenedorResenas.appendChild(vacio);
+        }
+        testimonios.forEach(function (testimonio) {
+            const tarjeta = document.createElement("article");
+            const estrellas = document.createElement("p");
+            estrellas.className = "estrellas";
+            estrellas.textContent = "★".repeat(testimonio.estrellas) + "☆".repeat(5 - testimonio.estrellas);
+            const mensaje = document.createElement("p");
+            mensaje.textContent = testimonio.descripcion;
+            const nombre = document.createElement("strong");
+            nombre.textContent = testimonio.nombre;
+            tarjeta.append(estrellas, mensaje, nombre);
+            contenedorResenas.appendChild(tarjeta);
+        });
+    } catch (error) {
+        contenedorResenas.textContent = "No se pudieron cargar las opiniones en este momento.";
+    }
+}
+
 const formularioTestimonio = document.getElementById("formulario-testimonio");
 if (formularioTestimonio) {
     formularioTestimonio.addEventListener("submit", async function (evento) {
         evento.preventDefault();
         const aviso = document.getElementById("testimonio-aviso");
         const boton = document.getElementById("enviar-testimonio");
+        const nombre = document.getElementById("testimonio-nombre").value.trim();
         const estrellas = Number(document.getElementById("testimonio-estrellas").value);
-        if (!Number.isInteger(estrellas) || estrellas < 1 || estrellas > 5) {
-            aviso.textContent = "Seleccioná entre 1 y 5 estrellas.";
+        const descripcion = document.getElementById("testimonio-descripcion").value.trim();
+        if (nombre.length < 2 || nombre.length > 80 || !Number.isInteger(estrellas) || estrellas < 1 || estrellas > 5 || descripcion.length < 10 || descripcion.length > 800) {
+            aviso.textContent = "Revisá el nombre, las estrellas y la descripción.";
             return;
         }
         boton.disabled = true;
         boton.textContent = "Enviando...";
         aviso.textContent = "";
         try {
-            const respuesta = await fetch("https://formspree.io/f/" + formspreeId, {
+            const respuesta = await fetch(apiTestimonios, {
                 method: "POST",
-                body: new FormData(formularioTestimonio),
-                headers: { Accept: "application/json" }
+                headers: Object.assign({}, cabecerasSupabase, { Prefer: "return=minimal" }),
+                body: JSON.stringify({ nombre: nombre, estrellas: estrellas, descripcion: descripcion })
             });
-            if (!respuesta.ok) throw new Error("No se pudo enviar");
+            if (!respuesta.ok) throw new Error("No se pudo guardar");
             formularioTestimonio.reset();
-            aviso.textContent = "¡Gracias! Recibimos tu testimonio y lo revisaremos antes de publicarlo.";
+            aviso.textContent = "¡Gracias! Tu testimonio quedó pendiente de aprobación.";
         } catch (error) {
-            aviso.textContent = "No pudimos enviar tu testimonio. Intentá nuevamente.";
+            aviso.textContent = "No pudimos guardar tu testimonio. Intentá nuevamente.";
         } finally {
             boton.disabled = false;
             boton.textContent = "Enviar testimonio";
         }
     });
 }
+cargarTestimonios();
