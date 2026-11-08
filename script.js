@@ -83,9 +83,19 @@ function mostrarProductos() {
         cantidad.setAttribute("aria-label", "Cantidad en kg de " + item.nombre);
         const boton = document.createElement("button");
         boton.type = "button";
-        boton.textContent = "Agregar al carrito";
+        boton.className = "boton-agregar";
+        const enCarrito = carrito.some(function (producto) { return producto.id === item.id; });
+        boton.textContent = enCarrito ? "✓ Agregado · sumar más" : "Agregar al carrito";
+        if (enCarrito) boton.classList.add("en-carrito");
         boton.addEventListener("click", function () {
-            agregarProducto(item.id, Number(cantidad.value));
+            const cantidadNueva = Number(cantidad.value);
+            if (!Number.isFinite(cantidadNueva) || cantidadNueva <= 0 || !Number.isInteger(cantidadNueva * 2)) {
+                estado.textContent = "Ingresá una cantidad válida en pasos de 0,5 kg.";
+                return;
+            }
+            agregarProducto(item.id, cantidadNueva);
+            boton.classList.add("en-carrito");
+            boton.textContent = "✓ Agregado · sumar más";
         });
         tarjeta.append(imagen, titulo, descripcion, precio, etiqueta, cantidad, boton);
         contenedor.appendChild(tarjeta);
@@ -104,6 +114,7 @@ function agregarProducto(id, cantidad) {
     else carrito.push({ id: id, cantidad: cantidad });
     guardarCarrito();
     mostrarCarrito();
+    mostrarProductos();
     estado.textContent = item.nombre + " agregado al carrito.";
 }
 
@@ -119,6 +130,7 @@ function cambiarCantidad(id, cantidad) {
     }
     guardarCarrito();
     mostrarCarrito();
+    mostrarProductos();
 }
 
 function validarCompra() {
@@ -172,6 +184,7 @@ document.getElementById("vaciar-carrito").addEventListener("click", function () 
     carrito = [];
     guardarCarrito();
     mostrarCarrito();
+    mostrarProductos();
 });
 buscar.addEventListener("input", mostrarProductos);
 filtro.addEventListener("change", mostrarProductos);
