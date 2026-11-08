@@ -2,7 +2,7 @@
 // Los productos se consultan desde la API REST pública de GitHub.
 const urlProductos = "https://api.github.com/repos/orianahernandez14/proyecto-supremapollo/contents/catalogo.json?ref=entrega-final-ecommerce";
 const whatsappPedidos = "541126752010";
-const formspreeId = ""; // Completar con el ID de Formspree para activar el contacto
+const formspreeId = "mqpporzl";
 const claveCarrito = "supremas-carrito-v1";
 let productos = [];
 let carrito = [];
