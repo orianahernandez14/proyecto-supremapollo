@@ -525,3 +525,16 @@ body { background-size: auto; }
 :focus-visible { outline:3px solid #246ac5; outline-offset:3px; }
 @media(max-width:768px) { .compra-layout,.resenas-grid { grid-template-columns:1fr; } .catalogo-controles { flex-direction:column; } .producto { max-width:100%; } }
 \n/* Confirmación persistente al agregar productos al carrito */\n.producto .boton-agregar { transition: background-color .18s ease, color .18s ease, transform .18s ease; }\n.producto .boton-agregar.en-carrito { background:#287b49; color:#fff; }\n.producto .boton-agregar:active { transform:scale(.97); background:#175b34; }\n
+/* Testimonios: formulario claro y adaptable a celulares */
+.panel-testimonio { max-width:650px; margin:30px auto 0; padding:28px; border-radius:18px; background:#fff; text-align:left; box-shadow:0 8px 24px rgba(80,50,20,.1); }
+.panel-testimonio h3 { margin:0 0 18px; }
+#formulario-testimonio { display:flex; flex-direction:column; gap:10px; }
+#formulario-testimonio label { font-weight:600; }
+#formulario-testimonio input,#formulario-testimonio select,#formulario-testimonio textarea { width:100%; max-width:100%; padding:12px; border:1px solid #bca995; border-radius:9px; font:inherit; background:#fff; color:#222; }
+#formulario-testimonio button { cursor:pointer; padding:13px; border:0; border-radius:10px; background:#e94a0d; color:#fff; font:inherit; font-weight:700; }
+#formulario-testimonio button:disabled { opacity:.65; cursor:wait; }
+#formulario-testimonio button:active { background:#287b49; }
+#testimonio-aviso { font-weight:600; }
+#resenas-contenedor { grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr)); }
+#resenas-vacias { grid-column:1/-1; }
+@media(max-width:600px) { .panel-testimonio { padding:18px; } }
