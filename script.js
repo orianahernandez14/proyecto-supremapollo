@@ -357,15 +357,15 @@ function mostrarRecetas() {
         contenedorRecetas.appendChild(tarjeta);
     });
 }
-document.getElementById("recetas-anterior").addEventListener("click", function () {
+document.getElementById("recetas-anterior")?.addEventListener("click", function () {
     indiceRecetas = Math.max(0, indiceRecetas - 1);
-    mostrarRecetas();
+    if (document.getElementById("recetas-contenedor")) mostrarRecetas();
 });
-document.getElementById("recetas-siguiente").addEventListener("click", function () {
+document.getElementById("recetas-siguiente")?.addEventListener("click", function () {
     indiceRecetas = Math.min(recetas.length - 3, indiceRecetas + 1);
     mostrarRecetas();
 });
-document.getElementById("abrir-carrito").addEventListener("click", function () {
+document.getElementById("abrir-carrito")?.addEventListener("click", function () {
     document.getElementById("hacer-pedido").scrollIntoView({ behavior: "smooth" });
 });
 mostrarRecetas();
