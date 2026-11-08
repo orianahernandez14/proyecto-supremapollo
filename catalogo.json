@@ -1,0 +1,42 @@
+[
+  {
+    "id": "granel",
+    "nombre": "Pollo a granel",
+    "tipo": "granel",
+    "descripcion": "Supremas frescas, sin condimentos y selladas al vacío.",
+    "precio": 11499,
+    "imagen": "img/pollo-granel.png"
+  },
+  {
+    "id": "clasico",
+    "nombre": "Clásico",
+    "tipo": "aderezado",
+    "descripcion": "Aceite, sal y pimienta. Listas para cocinar.",
+    "precio": 16999,
+    "imagen": "img/pollo-clasico.png"
+  },
+  {
+    "id": "provenzal",
+    "nombre": "Provenzal",
+    "tipo": "aderezado",
+    "descripcion": "Ajo, perejil, aceite, sal y pimienta.",
+    "precio": 16999,
+    "imagen": "img/pollo-provenzal.png"
+  },
+  {
+    "id": "mostaza",
+    "nombre": "Mostaza",
+    "tipo": "aderezado",
+    "descripcion": "Un toque suave de mostaza para cocinar en casa.",
+    "precio": 16999,
+    "imagen": "img/pollo-mostaza.png"
+  },
+  {
+    "id": "pimenton",
+    "nombre": "Pimentón",
+    "tipo": "aderezado",
+    "descripcion": "Aceite, sal, pimienta y pimentón.",
+    "precio": 16999,
+    "imagen": "img/pollo-pimenton.png"
+  }
+]
