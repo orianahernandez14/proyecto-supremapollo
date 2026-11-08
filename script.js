@@ -76,7 +76,7 @@ function mostrarProductos() {
         etiqueta.textContent = "Cantidad (kg)";
         const cantidad = document.createElement("input");
         cantidad.type = "number";
-        cantidad.min = "0.5";
+        cantidad.min = item.tipo === "granel" ? "5" : "0.5";
         cantidad.step = "0.5";
         cantidad.value = item.tipo === "granel" ? "5" : "1";
         cantidad.className = "cantidad-producto";
@@ -123,6 +123,12 @@ function cambiarCantidad(id, cantidad) {
         mensajeReglas.textContent = "Usá cantidades válidas de 0,5 kg.";
         return;
     }
+    const producto = productos.find(function (p) { return p.id === id; });
+    if (producto && producto.tipo === "granel" && cantidad > 0 && cantidad < 5) {
+        mensajeReglas.textContent = "El pollo a granel requiere al menos 5 kg. Para quitarlo, usá Eliminar.";
+        mostrarCarrito();
+        return;
+    }
     if (cantidad === 0) carrito = carrito.filter(function (p) { return p.id !== id; });
     else {
         const item = carrito.find(function (p) { return p.id === id; });
@@ -161,7 +167,7 @@ function mostrarCarrito() {
         nombre.textContent = producto.nombre + " - " + dinero(producto.precio * item.cantidad);
         const cantidad = document.createElement("input");
         cantidad.type = "number";
-        cantidad.min = "0";
+        cantidad.min = producto.tipo === "granel" ? "5" : "0.5";
         cantidad.step = "0.5";
         cantidad.value = item.cantidad;
         cantidad.setAttribute("aria-label", "Kilos de " + producto.nombre);
@@ -240,3 +246,36 @@ document.getElementById("formulario-contacto").addEventListener("submit", async 
 
 recuperarCarrito();
 cargarProductos();
+
+// Los testimonios se envían a Formspree para revisión antes de publicarse.
+const formularioTestimonio = document.getElementById("formulario-testimonio");
+if (formularioTestimonio) {
+    formularioTestimonio.addEventListener("submit", async function (evento) {
+        evento.preventDefault();
+        const aviso = document.getElementById("testimonio-aviso");
+        const boton = document.getElementById("enviar-testimonio");
+        const estrellas = Number(document.getElementById("testimonio-estrellas").value);
+        if (!Number.isInteger(estrellas) || estrellas < 1 || estrellas > 5) {
+            aviso.textContent = "Seleccioná entre 1 y 5 estrellas.";
+            return;
+        }
+        boton.disabled = true;
+        boton.textContent = "Enviando...";
+        aviso.textContent = "";
+        try {
+            const respuesta = await fetch("https://formspree.io/f/" + formspreeId, {
+                method: "POST",
+                body: new FormData(formularioTestimonio),
+                headers: { Accept: "application/json" }
+            });
+            if (!respuesta.ok) throw new Error("No se pudo enviar");
+            formularioTestimonio.reset();
+            aviso.textContent = "¡Gracias! Recibimos tu testimonio y lo revisaremos antes de publicarlo.";
+        } catch (error) {
+            aviso.textContent = "No pudimos enviar tu testimonio. Intentá nuevamente.";
+        } finally {
+            boton.disabled = false;
+            boton.textContent = "Enviar testimonio";
+        }
+    });
+}
