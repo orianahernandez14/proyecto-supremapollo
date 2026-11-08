@@ -4,7 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Suprema de Pollo</title>
+    <title>Suprema de Pollo | Supremas frescas para cocinar</title>
+    <meta name="description" content="Supremas de pollo frescas, a granel y aderezadas. Combiná sabores desde 5 kg y coordiná tu entrega.">
+    <meta name="theme-color" content="#f2d1ad">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
@@ -27,7 +30,10 @@
                 <li><a href="#inicio">INICIO</a></li>
                 <li><a href="#productos">NUESTROS PRODUCTOS</a></li>
                 <li><a href="#como-funciona">CÓMO FUNCIONA</a></li>
+                <li><a href="#resenas">RESEÑAS</a></li>
                 <li><a href="#contacto">CONTACTO</a></li>
+                <li><a href="#carrito">CARRITO <span id="contador-carrito" aria-live="polite">0</span></a></li>
+                <li><button id="cambiar-tema" type="button" aria-pressed="false">🌙 Modo oscuro</button></li>
             </ul>
         </nav>
     </header>
@@ -48,7 +54,7 @@
                 <p>Entrega a coordinar.</p>
 
                 <a class="boton-principal" href="#hacer-pedido">
-                    <i class="fab fa-whatsapp"></i> Realizar compra y agendar entrega
+                    <i class="fas fa-shopping-cart" aria-hidden="true"></i> Armar mi pedido
                 </a>
             </div>
 
@@ -71,50 +77,14 @@
                     <p>Supremas de pollo frescas, aderezadas y listas para cocinar.</p>
                 </div>
 
-            <div class="productos__contenedor">
-
-                <article class="producto">
-                    <img class="producto__imagen" src="img/pollo-granel.png"
-                        alt="Supremas de pollo a granel selladas al vacío">
-                    <h3>Pollo a granel</h3>
-                    <p>Fresca, sin condimentos y sellada al vacío. Lista para preparar a tu gusto.</p>
-                    <p class="precio">$11.499 <span>por kg</span></p>
-                    <a class="elegir-producto" href="#hacer-pedido" data-producto="granel">Elegir producto</a>
-                </article>
-
-                <article class="producto">
-                    <img class="producto__imagen" src="img/pollo-clasico.png" alt="Supremas de pollo con sal y pimienta">
-                    <h3>Clásico</h3>
-                    <p>El sabor de siempre. Aceite, sal y pimienta, listo para cocinar.</p>
-                    <p class="precio">$16.999 <span>por kg</span></p>
-                    <a class="elegir-producto" href="#hacer-pedido" data-producto="clasico">Elegir producto</a>
-                </article>
-
-                <article class="producto">
-                    <img class="producto__imagen" src="img/pollo-provenzal.png" alt="Supremas de pollo con ajo y perejil">
-                    <h3>Provenzal</h3>
-                    <p>Con ajo, perejil, aceite, sal y pimienta. Una opción bien casera.</p>
-                    <p class="precio">$16.999 <span>por kg</span></p>
-                    <a class="elegir-producto" href="#hacer-pedido" data-producto="provenzal">Elegir producto</a>
-                </article>
-
-                <article class="producto">
-                    <img class="producto__imagen" src="img/pollo-mostaza.png" alt="Supremas de pollo con mostaza">
-                    <h3>Mostaza</h3>
-                    <p>Un toque diferente, suave y lleno de sabor para tener listo en casa.</p>
-                    <p class="precio">$16.999 <span>por kg</span></p>
-                    <a class="elegir-producto" href="#hacer-pedido" data-producto="mostaza">Elegir producto</a>
-                </article>
-
-                <article class="producto">
-                    <img class="producto__imagen" src="img/pollo-pimenton.png" alt="Supremas de pollo con pimentón">
-                    <h3>Pimentón</h3>
-                    <p>Marinada con aceite, sal, pimienta y pimentón. Intensa y sabrosa.</p>
-                    <p class="precio">$16.999 <span>por kg</span></p>
-                    <a class="elegir-producto" href="#hacer-pedido" data-producto="pimenton">Elegir producto</a>
-                </article>
-
+            <div class="catalogo-controles">
+                <label for="buscar-producto">Buscar</label>
+                <input id="buscar-producto" type="search" placeholder="Buscar por nombre o ingrediente">
+                <label for="filtro-tipo">Categoría</label>
+                <select id="filtro-tipo"><option value="todos">Todos</option><option value="granel">A granel</option><option value="aderezado">Aderezados</option><option value="favoritos">Mis favoritos ♥</option></select>
             </div>
+            <p id="estado-catalogo" role="status" aria-live="polite">Cargando productos...</p>
+            <div class="productos__contenedor" id="productos-contenedor"></div>
 
             <div class="beneficios">
                 <div><i class="fas fa-leaf"></i><strong>Producto fresco</strong><span>Calidad que se nota</span></div>
@@ -131,7 +101,7 @@
                 <article>
                     <i class="fab fa-whatsapp"></i>
                     <h3>1. Realizá tu pedido</h3>
-                    <p>Escribinos por WhatsApp y contanos qué opción querés.</p>
+                    <p>Elegí tus productos y cantidades desde el catálogo.</p>
                 </article>
 
                 <article>
@@ -160,44 +130,58 @@
 
         <section id="hacer-pedido">
             <p class="subtitulo-naranja">PREPARÁ TU PEDIDO</p>
-            <h2>Elegí tu pollo y calculá el total</h2>
-            <p>La compra mínima es de 5 kg. El pedido se confirma por WhatsApp.</p>
+            <h2>Elegí y combiná tus supremas</h2>
+            <p>Aderezados: mínimo 5 kg entre todos los sabores. A granel: mínimo 5 kg del mismo producto.</p>
+            <p>Podés elegir cantidades superiores a 5 kg, sin necesidad de comprar múltiplos de cinco.</p>
+            <div class="compra-layout">
+                <div id="carrito" class="panel-compra">
+                    <h3>Tu carrito <span id="carrito-cantidad" aria-live="polite">0</span></h3>
+                    <div id="carrito-lista"><p>Todavía no agregaste productos.</p></div>
+                    <p id="carrito-reglas" role="status" aria-live="polite"></p>
+                    <p class="total-pedido">Total estimado: <strong id="carrito-total">$0</strong></p>
+                    <button id="vaciar-carrito" type="button" class="boton-secundario">Vaciar carrito</button>
+                </div>
+                <form id="formulario-pedido" class="panel-compra">
+                    <h3>Datos para coordinar la entrega</h3>
+                    <label for="pedido-nombre">Nombre</label><input id="pedido-nombre" type="text" required autocomplete="name">
+                    <label for="pedido-telefono">Teléfono</label><input id="pedido-telefono" type="tel" required autocomplete="tel">
+                    <label for="pedido-zona">Barrio o zona de entrega</label><input id="pedido-zona" type="text" required>
+                    <label for="pedido-dia">Día preferido</label>
+                    <select id="pedido-dia" required><option value="">Seleccioná un día</option><option>Lunes</option><option>Viernes</option></select>
+                    <p id="pedido-aviso" role="status" aria-live="polite"></p>
+                    <button type="submit"><i class="fab fa-whatsapp" aria-hidden="true"></i> Enviar pedido por WhatsApp</button>
+                    <p class="nota-pedido">Esta acción abre WhatsApp con el resumen. No se realiza un cobro ni se confirma automáticamente la compra.</p>
+                </form>
+            </div>
+        </section>
 
-            <form id="formulario-pedido">
-                <label for="pedido-producto">Producto</label>
-                <select id="pedido-producto" required>
-                    <option value="granel">Pollo a granel</option>
-                    <option value="clasico">Clásico (sal y pimienta)</option>
-                    <option value="provenzal">Provenzal</option>
-                    <option value="mostaza">Mostaza</option>
-                    <option value="pimenton">Pimentón</option>
-                </select>
+        <section id="resenas">
+            <h2>Opiniones de ejemplo</h2>
+            <p>Probá el filtro de puntuación. Estos testimonios son ficticios y se muestran únicamente como demostración del proyecto.</p>
+            <label for="filtro-resenas">Filtrar por estrellas</label>
+            <select id="filtro-resenas">
+                <option value="todas">Todas las puntuaciones</option>
+                <option value="5">5 estrellas</option>
+                <option value="4">4 estrellas</option>
+                <option value="3">3 estrellas</option>
+            </select>
+            <div class="resenas-grid" id="resenas-contenedor"></div>
+            <p id="resenas-estado" role="status" aria-live="polite"></p>
+        </section>
 
-                <label for="pedido-kilos">Cantidad (kg)</label>
-                <input id="pedido-kilos" type="number" min="5" step="1" value="5" required>
-
-                <p class="total-pedido">Total estimado: <strong id="pedido-total">$57.495</strong></p>
-
-                <label for="pedido-nombre">Nombre</label>
-                <input id="pedido-nombre" type="text" required placeholder="Tu nombre">
-
-                <label for="pedido-telefono">Teléfono</label>
-                <input id="pedido-telefono" type="tel" required placeholder="Tu número de contacto">
-
-                <label for="pedido-zona">Barrio o zona de entrega</label>
-                <input id="pedido-zona" type="text" required placeholder="¿En qué zona estás?">
-
-                <label for="pedido-dia">Día preferido</label>
-                <select id="pedido-dia" required>
-                    <option value="">Seleccioná un día</option>
-                    <option value="Lunes">Lunes</option>
-                    <option value="Viernes">Viernes</option>
-                </select>
-
-                <p id="pedido-aviso" role="status" aria-live="polite"></p>
-                <button type="submit"><i class="fab fa-whatsapp"></i> Consultar pedido por WhatsApp</button>
-                <p class="nota-pedido">Los precios son estimados. Consultá disponibilidad y zona de entrega.</p>
-            </form>
+        <section id="contacto-formulario" class="contacto-secundario">
+            <h2>Formulario para la entrega académica</h2>
+            <p>También podés escribirnos por WhatsApp si preferís una atención directa.</p>
+            <details>
+                <summary>Mostrar formulario de contacto</summary>
+                <form id="formulario-contacto">
+                    <label for="contacto-nombre">Nombre</label><input id="contacto-nombre" name="name" type="text" required>
+                    <label for="contacto-email">Correo electrónico</label><input id="contacto-email" name="email" type="email" required>
+                    <label for="contacto-mensaje">Mensaje</label><textarea id="contacto-mensaje" name="message" rows="5" required></textarea>
+                    <p id="contacto-aviso" role="status" aria-live="polite"></p>
+                    <button type="submit">Enviar consulta</button>
+                </form>
+            </details>
         </section>
 
         <section class="llamada" id="contacto">
@@ -208,7 +192,7 @@
                 <h2>Calidad que se nota,<br> sabor que te encanta.</h2>
                 <p>Compra mínima: 5 kg.</p>
                 <p>Consultá zona de entrega.</p><p>WhatsApp: 11 2675 2010 / 11 3238 4204</p>
-                <a href="#hacer-pedido"> <i class="fas fa-shopping-cart"></i> PREPARAR MI PEDIDO
+                <a href="https://wa.me/541126752010?text=Hola%2C%20quiero%20hacer%20una%20consulta%20sobre%20las%20supremas%20de%20pollo" target="_blank" rel="noopener noreferrer"> <i class="fab fa-whatsapp"></i> CONSULTAR POR WHATSAPP
                 </a>
             </div>
         </section>
@@ -224,6 +208,6 @@
         <p><i class="fas fa-location-dot"></i> Consultá zona de entrega</p>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
 </body>
 </html>

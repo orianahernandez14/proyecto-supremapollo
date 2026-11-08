@@ -1,35 +1,28 @@
-# Suprema de Pollo
+# Suprema de Pollo - E-commerce
 
-Landing page para mostrar las variedades de supremas de pollo y preparar consultas de pedidos por WhatsApp.
+Proyecto final del curso Front End. Tienda de supremas de pollo crudas, listas para cocinar en casa.
 
-Proyecto de práctica del curso Front End de Talento Tech. Está realizado con HTML, CSS y JavaScript.
+## Funcionalidades
+- Catálogo de productos consultado mediante fetch a la API REST pública de GitHub.
+- Búsqueda y filtro de productos, tarjetas dinámicas.
+- Carrito con cantidades editables, eliminación, total y localStorage.
+- Aderezados: mínimo 5 kg combinando sabores.
+- A granel: mínimo 5 kg por variedad, sin exigir múltiplos de cinco.
+- Consulta del pedido por WhatsApp.
+- Formulario de contacto preparado para Formspree (requiere configurar el ID).
+- HTML semántico, CSS responsive, Flexbox, Grid, Google Fonts y SEO básico.
 
-## Productos
-- Pollo a granel: $11.499/kg.
-- Clásico, Provenzal, Mostaza y Pimentón: $16.999/kg.
-- Compra mínima: 5 kg.
-- Entregas a coordinar; consultar zona.
-
-## Cómo probarlo
-1. Abrir `index.html` en el navegador.
-2. Elegir un producto desde las tarjetas.
-3. Indicar 5 kg o más.
-4. Completar los datos y elegir un día preferido.
-5. Pulsar «Consultar pedido por WhatsApp».
-
-El total es estimado. El sitio no cobra ni confirma automáticamente pedidos.
+## Cómo probar
+Abrir la página publicada en GitHub Pages. Se necesita conexión a Internet para cargar el catálogo desde la API.
 
 ## Archivos
-- `index.html`: contenido y formulario.
-- `styles.css`: diseño responsive.
-- `script.js`: cálculo, validaciones y mensaje de WhatsApp.
-- `img/`: fotografías y recursos.
+- index.html: estructura y formularios
+- styles.css: diseño y responsive
+- script.js: fetch, carrito, localStorage, formularios
+- catalogo.json: productos
+- img/: imágenes
 
-## Tecnologías practicadas
-HTML semántico, Flexbox, CSS Grid, Media Queries, variables, operadores, condicionales, bucles, funciones, DOM y eventos.
+## Pendiente de configurar
+Crear un formulario en Formspree y completar la variable formspreeId en script.js. Hasta entonces el formulario muestra un aviso y no envía mensajes.
 
-## Estado
-Primera versión con JavaScript en desarrollo. Pendiente de pruebas y publicación.
-
-## Autora
-Oriana Hernández — Curso Front End.
+Esta versión no cobra ni confirma pedidos. Mercado Pago, backoffice y notificaciones automáticas corresponden a una futura etapa comercial.
