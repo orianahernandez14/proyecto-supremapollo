@@ -137,6 +137,12 @@ function cambiarCantidad(id, cantidad) {
         mensajeReglas.textContent = "Usá cantidades válidas de 0,5 kg.";
         return;
     }
+    const producto = productos.find(function (p) { return p.id === id; });
+    if (producto && producto.tipo === "granel" && cantidad > 0 && cantidad < 5) {
+        mensajeReglas.textContent = "El pollo a granel no puede ser menor a 5 kg. Usá Eliminar para quitarlo.";
+        mostrarCarrito();
+        return;
+    }
     if (cantidad === 0) carrito = carrito.filter(function (p) { return p.id !== id; });
     else {
         const item = carrito.find(function (p) { return p.id === id; });
@@ -174,7 +180,7 @@ function mostrarCarrito() {
         nombre.textContent = producto.nombre + " - " + dinero(producto.precio * item.cantidad);
         const cantidad = document.createElement("input");
         cantidad.type = "number";
-        cantidad.min = "0";
+        cantidad.min = producto.tipo === "granel" ? "5" : "0.5";
         cantidad.step = "0.5";
         cantidad.value = item.cantidad;
         cantidad.setAttribute("aria-label", "Kilos de " + producto.nombre);
@@ -189,7 +195,8 @@ function mostrarCarrito() {
     if (carrito.length === 0) listaCarrito.textContent = "Todavía no agregaste productos.";
     document.getElementById("carrito-total").textContent = dinero(total);
     document.getElementById("contador-carrito").textContent = carrito.length;
-    document.getElementById("contador-flotante").textContent = carrito.length;
+    const contadorFlotante = document.getElementById("contador-flotante");
+    if (contadorFlotante) contadorFlotante.textContent = carrito.length;
     document.getElementById("carrito-cantidad").textContent = cantidadTotal + " kg";
     mensajeReglas.textContent = validarCompra() || "Tu pedido cumple las cantidades mínimas.";
 }
@@ -233,7 +240,7 @@ document.getElementById("formulario-contacto").addEventListener("submit", async 
     evento.preventDefault();
     const aviso = document.getElementById("contacto-aviso");
     if (!formspreeId) {
-        aviso.textContent = "El formulario de contacto está pendiente de vincular con Formspree.";
+        aviso.textContent = "El envío no está disponible en este momento. Podés contactarnos por WhatsApp.";
         return;
     }
     aviso.textContent = "Enviando...";
