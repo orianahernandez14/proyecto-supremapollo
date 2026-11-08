@@ -524,3 +524,4 @@ body { background-size: auto; }
 #contador-carrito { background:#e94a0d; color:white; border-radius:50%; padding:3px 8px; }
 :focus-visible { outline:3px solid #246ac5; outline-offset:3px; }
 @media(max-width:768px) { .compra-layout,.resenas-grid { grid-template-columns:1fr; } .catalogo-controles { flex-direction:column; } .producto { max-width:100%; } }
+\n/* Confirmación persistente al agregar productos al carrito */\n.producto .boton-agregar { transition: background-color .18s ease, color .18s ease, transform .18s ease; }\n.producto .boton-agregar.en-carrito { background:#287b49; color:#fff; }\n.producto .boton-agregar:active { transform:scale(.97); background:#175b34; }\n
