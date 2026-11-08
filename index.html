@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=20261108-2">
     <link rel="icon" type="image/png" href="img/favicon.png">
 </head>
 
@@ -156,19 +156,38 @@
         </section>
 
         <section id="resenas">
-            <h2>Lo que valoran nuestros clientes</h2>
-            <p>Una buena compra empieza con productos frescos y atención cercana.</p>
-            <div class="resenas-grid">
-                <article><h3>Producto fresco</h3><p>Supremas preparadas para que puedas cocinarlas como más te gusten.</p></article>
-                <article><h3>Sabores para combinar</h3><p>Podés elegir distintas variedades aderezadas en un mismo pedido.</p></article>
-                <article><h3>Entrega coordinada</h3><p>Consultá disponibilidad y coordiná el día por WhatsApp.</p></article>
+            <h2>Opiniones de nuestros clientes</h2>
+            <p>¿Ya probaste nuestras supremas? Contanos cómo fue tu experiencia.</p>
+            <div id="resenas-contenedor" class="resenas-grid" aria-live="polite">
+                <p id="resenas-vacias">Todavía no hay testimonios publicados. ¡Podés dejar el primero!</p>
             </div>
-            <p class="nota-pedido">Estas tarjetas describen beneficios del servicio; no son testimonios de clientes.</p>
+            <div class="panel-testimonio">
+                <h3>Dejá tu testimonio</h3>
+                <form id="formulario-testimonio">
+                    <label for="testimonio-nombre">Tu nombre</label>
+                    <input id="testimonio-nombre" name="nombre" type="text" maxlength="80" autocomplete="name" required>
+                    <label for="testimonio-estrellas">¿Cuántas estrellas nos das?</label>
+                    <select id="testimonio-estrellas" name="estrellas" required>
+                        <option value="">Elegí una calificación</option>
+                        <option value="5">★★★★★ — 5 estrellas</option>
+                        <option value="4">★★★★☆ — 4 estrellas</option>
+                        <option value="3">★★★☆☆ — 3 estrellas</option>
+                        <option value="2">★★☆☆☆ — 2 estrellas</option>
+                        <option value="1">★☆☆☆☆ — 1 estrella</option>
+                    </select>
+                    <label for="testimonio-descripcion">Tu experiencia</label>
+                    <textarea id="testimonio-descripcion" name="descripcion" rows="4" minlength="10" maxlength="800" required placeholder="Contanos qué te pareció nuestro producto..."></textarea>
+                    <input type="hidden" name="tipo" value="Nuevo testimonio para revisión">
+                    <p class="nota-pedido">Tu opinión se enviará para revisión antes de publicarse.</p>
+                    <button type="submit" id="enviar-testimonio">Enviar testimonio</button>
+                    <p id="testimonio-aviso" role="status" aria-live="polite"></p>
+                </form>
+            </div>
         </section>
 
         <section id="contacto-formulario">
             <h2>Contactanos</h2>
-            <p>Dejanos tu consulta. El formulario de Formspree se habilitará al configurar su identificador.</p>
+            <p>Dejanos tu consulta y te responderemos a la brevedad.</p>
             <form id="formulario-contacto">
                 <label for="contacto-nombre">Nombre</label><input id="contacto-nombre" name="name" type="text" required>
                 <label for="contacto-email">Correo electrónico</label><input id="contacto-email" name="email" type="email" required>
@@ -202,6 +221,6 @@
         <p><i class="fas fa-location-dot"></i> Consultá zona de entrega</p>
     </footer>
 
-    <script src="script.js" defer></script>
+    <script src="script.js?v=20261108-2" defer></script>
 </body>
 </html>
