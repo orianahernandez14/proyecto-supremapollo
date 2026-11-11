@@ -189,9 +189,9 @@
             <h2>Contactanos</h2>
             <p>Dejanos tu consulta y te responderemos a la brevedad.</p>
             <form id="formulario-contacto">
-                <label for="contacto-nombre">Nombre</label><input id="contacto-nombre" name="name" type="text" required>
-                <label for="contacto-email">Correo electrónico</label><input id="contacto-email" name="email" type="email" required>
-                <label for="contacto-mensaje">Mensaje</label><textarea id="contacto-mensaje" name="message" rows="5" required></textarea>
+                <label for="contacto-nombre">Nombre</label><input id="contacto-nombre" name="name" type="text" minlength="2" maxlength="80" required>
+                <label for="contacto-email">Correo electrónico</label><input id="contacto-email" name="email" type="email" maxlength="254" required>
+                <label for="contacto-mensaje">Mensaje</label><textarea id="contacto-mensaje" name="message" rows="5" minlength="10" maxlength="3000" required></textarea>
                 <p id="contacto-aviso" role="status" aria-live="polite"></p>
                 <button type="submit">Enviar consulta</button>
             </form>
@@ -221,7 +221,7 @@
         <p><i class="fas fa-location-dot"></i> Consultá zona de entrega</p>
     </footer>
 
-    <script src="script.js?v=20261108-3" defer></script>
+    <script src="script.js?v=20261111-1" defer></script>
     <script src="testimonios.js?v=20261108-3" defer></script>
 </body>
 </html>
