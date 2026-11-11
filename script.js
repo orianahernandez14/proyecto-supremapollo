@@ -2,7 +2,8 @@
 // Los productos se consultan desde la API REST pública de GitHub.
 const urlProductos = "https://api.github.com/repos/orianahernandez14/proyecto-supremapollo/contents/catalogo.json?ref=entrega-final-ecommerce";
 const whatsappPedidos = "541126752010";
-const formspreeId = "mqpporzl";
+const supabaseContactoUrl = "https://wumrhtyztpircywntcdw.supabase.co/rest/v1/consultas";
+const supabaseClavePublica = "sb_publishable_JqC21O-PYQDhTFdMBcXK0Q_TBGibGjj";
 const claveCarrito = "supremas-carrito-v1";
 let productos = [];
 let carrito = [];
@@ -224,23 +225,39 @@ document.getElementById("formulario-pedido").addEventListener("submit", function
 
 document.getElementById("formulario-contacto").addEventListener("submit", async function (evento) {
     evento.preventDefault();
+    const formulario = evento.target;
     const aviso = document.getElementById("contacto-aviso");
-    if (!formspreeId) {
-        aviso.textContent = "El formulario de contacto está pendiente de vincular con Formspree.";
+    const boton = formulario.querySelector('button[type="submit"]');
+    const nombre = document.getElementById("contacto-nombre").value.trim();
+    const email = document.getElementById("contacto-email").value.trim();
+    const mensaje = document.getElementById("contacto-mensaje").value.trim();
+    if (nombre.length < 2 || nombre.length > 80 || email.length > 254 || mensaje.length < 10 || mensaje.length > 3000) {
+        aviso.textContent = "Ingresá un nombre válido y un mensaje de al menos 10 caracteres.";
         return;
     }
-    aviso.textContent = "Enviando...";
+    boton.disabled = true;
+    aviso.textContent = "Enviando consulta...";
     try {
-        const respuesta = await fetch("https://formspree.io/f/" + formspreeId, {
+        const respuesta = await fetch(supabaseContactoUrl, {
             method: "POST",
-            body: new FormData(evento.target),
-            headers: { Accept: "application/json" }
+            headers: {
+                apikey: supabaseClavePublica,
+                "Content-Type": "application/json",
+                Prefer: "return=minimal"
+            },
+            body: JSON.stringify({ nombre, email, mensaje })
         });
-        if (!respuesta.ok) throw new Error("Error al enviar");
-        aviso.textContent = "¡Mensaje enviado!";
-        evento.target.reset();
+        if (!respuesta.ok) {
+            const detalle = await respuesta.text();
+            throw new Error("Supabase HTTP " + respuesta.status + (detalle ? ": " + detalle : ""));
+        }
+        aviso.textContent = "¡Consulta enviada! Te responderemos a la brevedad.";
+        formulario.reset();
     } catch (error) {
-        aviso.textContent = "No se pudo enviar. Intentá nuevamente.";
+        console.error("Error al enviar consulta:", error);
+        aviso.textContent = "No se pudo enviar la consulta. Intentá nuevamente más tarde.";
+    } finally {
+        boton.disabled = false;
     }
 });
 
