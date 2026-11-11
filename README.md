@@ -22,7 +22,7 @@ Estoy en una etapa de formación como desarrolladora, por eso traté de aplicar 
 - Incorporé una confirmación visual: el botón de un producto agregado cambia de color.
 - Agregué validaciones de compra según el tipo de producto.
 - Preparé un pedido por **WhatsApp**, con un mensaje que resume los productos elegidos.
-- Conecté un formulario de contacto con **Formspree**.
+- Conecté el formulario de contacto con **Supabase**, para guardar las consultas en PostgreSQL.
 - Incorporé un sistema de testimonios con calificación por estrellas y aprobación antes de publicarlos.
 - Publiqué el sitio utilizando **GitHub Pages**.
 
@@ -41,9 +41,9 @@ El carrito muestra las cantidades y el importe estimado. **No procesa pagos ni c
 
 Guardé el código en GitHub y publiqué la página con GitHub Pages. Para practicar el uso de APIs y JavaScript asíncrono, decidí obtener los productos desde el archivo `catalogo.json` mediante la API pública de GitHub. Después, con JavaScript, transformo esos datos en las tarjetas que se ven en la tienda.
 
-### Formspree
+### Formulario de contacto en Supabase
 
-Utilicé **Formspree** para que el formulario de contacto pueda enviar consultas sin tener que desarrollar un servidor propio. De esta forma, el formulario no queda solamente como un elemento visual.
+Al principio utilicé Formspree, pero después decidí centralizar también las consultas en **Supabase**. El formulario guarda nombre, correo electrónico y mensaje en una tabla PostgreSQL con políticas RLS: cualquier visitante puede enviar una consulta, pero solo los administradores autorizados pueden leerla. Por ahora reviso las consultas desde el panel de tablas de Supabase; todavía no implementé avisos por correo ni un gestor de consultas dentro de la web.
 
 ### WhatsApp
 
@@ -69,7 +69,7 @@ Para proteger la administración configuré autenticación y políticas de acces
 - **JSON y API REST de GitHub:** catálogo de productos.
 - **Git y GitHub:** control de versiones y trabajo con ramas.
 - **GitHub Pages:** publicación.
-- **Formspree:** formulario de contacto.
+- **Supabase:** formulario de contacto, almacenamiento de consultas y testimonios.
 - **WhatsApp:** preparación del pedido.
 - **Supabase, PostgreSQL y autenticación:** almacenamiento y moderación de testimonios.
 
@@ -95,7 +95,8 @@ El [panel de administración de testimonios](https://orianahernandez14.github.io
 | `catalogo.json` | Información y precios de productos. |
 | `testimonios.js` | Envío y visualización de testimonios con Supabase. |
 | `admin-testimonios.html` | Acceso y moderación de testimonios. |
-| `supabase-testimonios.sql` | Estructura y políticas de seguridad de la base de datos. |
+| `supabase-testimonios.sql` | Estructura y políticas de seguridad de los testimonios. |
+| `supabase-consultas.sql` | Tabla y políticas RLS para recibir consultas de contacto. |
 | `img/` | Imágenes utilizadas en el sitio. |
 
 ## Lo que aprendí y lo que quiero seguir mejorando
@@ -108,4 +109,4 @@ Sé que todavía hay cosas por mejorar, como la experiencia de usuario, las prue
 
 ---
 
-**Estado de la entrega:** el código final está integrado en la rama `main`. Los servicios externos requieren conexión a Internet y su configuración activa. Este sitio es un proyecto de aprendizaje y no realiza cobros automáticos.
+**Estado de la entrega:** el código final está integrado en la rama `main`. Los servicios externos requieren conexión a Internet y su configuración activa. Para activar el formulario de contacto hay que ejecutar `supabase-consultas.sql` una vez en el SQL Editor del proyecto Supabase. Este sitio es un proyecto de aprendizaje y no realiza cobros automáticos.
