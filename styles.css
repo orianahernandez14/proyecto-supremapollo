@@ -538,3 +538,24 @@ body { background-size: auto; }
 #resenas-contenedor { grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr)); }
 #resenas-vacias { grid-column:1/-1; }
 @media(max-width:600px) { .panel-testimonio { padding:18px; } }
+
+/* Mejoras UX posteriores a las pruebas con usuarios */
+.cantidad-en-carrito { color:#246a40 !important; font-weight:800; background:#eaf6ed; border-radius:10px; padding:10px 12px; margin:10px; }
+.carrito-flotante { display:none; }
+@media (max-width:768px) {
+  body { padding-bottom:74px; }
+  .carrito-flotante {
+    display:flex; align-items:center; justify-content:center; gap:10px;
+    position:fixed; z-index:1000; left:16px; right:16px; bottom:14px;
+    padding:14px 18px; border-radius:30px; background:#292929; color:white;
+    box-shadow:0 5px 20px rgba(0,0,0,.25); font-weight:800; text-decoration:none;
+    font-size:1rem;
+  }
+  .carrito-flotante.con-productos { background:#287b49; }
+  .cantidad-producto { width:100%; max-width:160px; min-height:46px; }
+  #productos { padding-top:45px; }
+  .producto { scroll-margin-top:20px; }
+}
+.cantidad-producto::-webkit-inner-spin-button,
+.cantidad-producto::-webkit-outer-spin-button { -webkit-appearance:none; margin:0; }
+.cantidad-producto { appearance:textfield; -moz-appearance:textfield; }
