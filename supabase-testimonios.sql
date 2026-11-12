@@ -36,4 +36,3 @@ create policy "administrador ve su membresia" on public.administradores for sele
 using (user_id = (select auth.uid()));
 -- Después de crear un usuario en Authentication > Users, autorizarlo con:
 -- insert into public.administradores (user_id) values ('UUID-DEL-USUARIO');
--- IMPORTANTE: ejecutar esta sentencia solo en SQL Editor, nunca desde el navegador.
