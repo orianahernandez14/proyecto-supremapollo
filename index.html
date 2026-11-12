@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="styles.css?v=20261108-3">
+    <link rel="stylesheet" href="styles.css?v=20261112-1">
     <link rel="icon" type="image/png" href="img/favicon.png">
 </head>
 
@@ -28,12 +28,11 @@
         <nav>
             <ul>
                 <li><a href="#inicio">INICIO</a></li>
-                <li><a href="#productos">NUESTROS PRODUCTOS</a></li>
                 <li><a href="#como-funciona">CÓMO FUNCIONA</a></li>
+                <li><a href="#productos">NUESTROS PRODUCTOS</a></li>
                 <li><a href="#resenas">RESEÑAS</a></li>
                 <li><a href="#contacto-formulario">CONTACTO</a></li>
                 <li><a href="#carrito">CARRITO <span id="contador-carrito" aria-live="polite">0</span></a></li>
-                <li><a href="#contacto">CONTACTO</a></li>
             </ul>
         </nav>
     </header>
@@ -53,7 +52,7 @@
                 <p><strong>Compra mínima: 5 kg.</strong></p>
                 <p>Entrega a coordinar.</p>
 
-                <a class="boton-principal" href="#hacer-pedido">
+                <a class="boton-principal" href="#como-funciona">
                     <i class="fas fa-shopping-cart" aria-hidden="true"></i> Armar mi pedido
                 </a>
             </div>
@@ -66,30 +65,6 @@
                     <span>a domicilio</span>
                     <small>Consultar zona</small>
                 </div>
-            </div>
-        </section>
-
-
-        <section id="productos">
-            <p class="subtitulo-naranja">NUESTROS PRODUCTOS</p>
-                <div class="h2-gris"> 
-                    <h2>Elegí tu sabor favorito</h2>
-                    <p>Supremas de pollo frescas, aderezadas y listas para cocinar.</p>
-                </div>
-
-            <div class="catalogo-controles">
-                <label for="buscar-producto">Buscar</label>
-                <input id="buscar-producto" type="search" placeholder="Buscar por nombre o ingrediente">
-                <label for="filtro-tipo">Categoría</label>
-                <select id="filtro-tipo"><option value="todos">Todos</option><option value="granel">A granel</option><option value="aderezado">Aderezados</option></select>
-            </div>
-            <p id="estado-catalogo" role="status" aria-live="polite">Cargando productos...</p>
-            <div class="productos__contenedor" id="productos-contenedor"></div>
-
-            <div class="beneficios">
-                <div><i class="fas fa-leaf"></i><strong>Producto fresco</strong><span>Calidad que se nota</span></div>
-                <div><i class="fas fa-utensils"></i><strong>Listas para cocinar</strong><span>Ahorrá tiempo</span></div>
-                <div><i class="fas fa-heart"></i><strong>Hechas en casa</strong><span>Con mucho cuidado</span></div>
             </div>
         </section>
 
@@ -127,6 +102,32 @@
         </section>
 
 
+
+        <section id="productos">
+            <p class="subtitulo-naranja">NUESTROS PRODUCTOS</p>
+                <div class="h2-gris"> 
+                    <h2>Elegí tu sabor favorito</h2>
+                    <p>Supremas de pollo frescas, aderezadas y listas para cocinar.</p>
+                </div>
+
+            <div class="catalogo-controles">
+                <label for="buscar-producto">Buscar</label>
+                <input id="buscar-producto" type="search" placeholder="Buscar por nombre o ingrediente">
+                <label for="filtro-tipo">Categoría</label>
+                <select id="filtro-tipo"><option value="todos">Todos</option><option value="granel">A granel</option><option value="aderezado">Aderezados</option></select>
+            </div>
+            <p id="estado-catalogo" role="status" aria-live="polite">Cargando productos...</p>
+            <div class="productos__contenedor" id="productos-contenedor"></div>
+
+            <div class="beneficios">
+                <div><i class="fas fa-leaf"></i><strong>Producto fresco</strong><span>Calidad que se nota</span></div>
+                <div><i class="fas fa-utensils"></i><strong>Listas para cocinar</strong><span>Ahorrá tiempo</span></div>
+                <div><i class="fas fa-heart"></i><strong>Hechas en casa</strong><span>Con mucho cuidado</span></div>
+            </div>
+        </section>
+
+
+        <a class="carrito-flotante" href="#carrito" id="acceso-carrito-flotante" aria-label="Ver carrito de compras">🛒 <span id="carrito-flotante-resumen">Ver carrito</span></a>
 
         <section id="hacer-pedido">
             <p class="subtitulo-naranja">PREPARÁ TU PEDIDO</p>
@@ -221,7 +222,7 @@
         <p><i class="fas fa-location-dot"></i> Consultá zona de entrega</p>
     </footer>
 
-    <script src="script.js?v=20261111-1" defer></script>
+    <script src="script.js?v=20261112-1" defer></script>
     <script src="testimonios.js?v=20261108-3" defer></script>
 </body>
 </html>
