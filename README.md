@@ -78,7 +78,7 @@ Para proteger la administración configuré autenticación y políticas de acces
 1. Entrar a la [tienda publicada](https://orianahernandez14.github.io/proyecto-supremapollo/).
 2. Buscar productos y agregar distintas cantidades al carrito.
 3. Verificar los mínimos de compra, modificar cantidades y eliminar productos.
-4. Preparar el pedido y comprobar que se genera el mensaje para WhatsApp (sin necesidad de enviarlo).
+4. Preparar el pedido y comprobar que se genera el mensaje para WhatsApp (pueden enviarlo o no, indicar que es test).
 5. Enviar una consulta desde el formulario de contacto.
 6. Dejar un testimonio con nombre, estrellas y descripción. La opinión queda pendiente de aprobación.
 7. Revisar la experiencia desde un celular y desde una computadora.
@@ -109,4 +109,4 @@ Sé que todavía hay cosas por mejorar, como la experiencia de usuario, las prue
 
 ---
 
-**Estado de la entrega:** el código final está integrado en la rama `main`. Los servicios externos requieren conexión a Internet y su configuración activa. Para activar el formulario de contacto hay que ejecutar `supabase-consultas.sql` una vez en el SQL Editor del proyecto Supabase. Este sitio es un proyecto de aprendizaje y no realiza cobros automáticos.
+**Estado de la entrega:** el código final está integrado en la rama `main`.
