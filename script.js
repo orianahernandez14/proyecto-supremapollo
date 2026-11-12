@@ -1,6 +1,6 @@
 // Tienda de supremas - proyecto final Front End
 // Los productos se consultan desde la API REST pública de GitHub.
-const urlProductos = "https://api.github.com/repos/orianahernandez14/proyecto-supremapollo/contents/catalogo.json?ref=entrega-final-ecommerce";
+const urlProductos = "https://api.github.com/repos/orianahernandez14/proyecto-supremapollo/contents/catalogo.json?ref=main";
 const whatsappPedidos = "541126752010";
 const supabaseContactoUrl = "https://wumrhtyztpircywntcdw.supabase.co/rest/v1/consultas";
 const supabaseClavePublica = "sb_publishable_JqC21O-PYQDhTFdMBcXK0Q_TBGibGjj";
@@ -73,6 +73,11 @@ function mostrarProductos() {
         const precio = document.createElement("p");
         precio.className = "precio";
         precio.textContent = dinero(item.precio) + " por kg";
+        const enPedido = carrito.find(function (producto) { return producto.id === item.id; });
+        const indicador = document.createElement("p");
+        indicador.className = "cantidad-en-carrito";
+        indicador.setAttribute("aria-live", "polite");
+        indicador.textContent = enPedido ? "En tu carrito: " + enPedido.cantidad + " kg" : "Todavía no agregaste este producto";
         const etiqueta = document.createElement("label");
         etiqueta.textContent = "Cantidad (kg)";
         const cantidad = document.createElement("input");
@@ -98,7 +103,7 @@ function mostrarProductos() {
             boton.classList.add("en-carrito");
             boton.textContent = "✓ Agregado · sumar más";
         });
-        tarjeta.append(imagen, titulo, descripcion, precio, etiqueta, cantidad, boton);
+        tarjeta.append(imagen, titulo, descripcion, precio, indicador, etiqueta, cantidad, boton);
         contenedor.appendChild(tarjeta);
     });
 }
@@ -184,6 +189,10 @@ function mostrarCarrito() {
     document.getElementById("carrito-total").textContent = dinero(total);
     document.getElementById("contador-carrito").textContent = carrito.length;
     document.getElementById("carrito-cantidad").textContent = cantidadTotal + " kg";
+    const resumenFlotante = document.getElementById("carrito-flotante-resumen");
+    const accesoFlotante = document.getElementById("acceso-carrito-flotante");
+    if (resumenFlotante) resumenFlotante.textContent = cantidadTotal > 0 ? cantidadTotal + " kg · " + dinero(total) + " · Ver carrito" : "Ver carrito";
+    if (accesoFlotante) accesoFlotante.classList.toggle("con-productos", cantidadTotal > 0);
     mensajeReglas.textContent = validarCompra() || "Tu pedido cumple las cantidades mínimas.";
 }
 
